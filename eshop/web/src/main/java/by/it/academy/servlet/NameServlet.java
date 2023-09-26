@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 public class NameServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Read data from Request
         String fio = req.getParameter("fio");
         System.out.println("FIO: " + fio);

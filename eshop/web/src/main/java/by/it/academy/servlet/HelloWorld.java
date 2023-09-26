@@ -11,7 +11,7 @@ import jakarta.servlet.http.*;
 public class HelloWorld extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException
+            throws IOException
     {
         Enumeration<String> headerNames = request.getHeaderNames();
         Cookie[] cookies = request.getCookies();
