@@ -30,9 +30,9 @@ public class ProductSpecificationDao {
 
     public void create(ProductSpecificationDto productSpecificationDto) {}
 
-    public void update(ProductSpecificationDto productSpecificationDto) {};
+    public void update(ProductSpecificationDto productSpecificationDto) {}
 
-    public void delete(ProductSpecificationDto productSpecificationDto){};
+    public void delete(ProductSpecificationDto productSpecificationDto){}
 
 
 

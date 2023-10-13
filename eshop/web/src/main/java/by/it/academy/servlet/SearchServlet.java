@@ -3,7 +3,6 @@ package by.it.academy.servlet;
 import by.it.academy.model.ProductSpecification;
 import by.it.academy.model.SearchCriteria;
 import by.it.academy.service.SearchService;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

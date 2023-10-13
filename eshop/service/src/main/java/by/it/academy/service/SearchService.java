@@ -5,13 +5,12 @@ import by.it.academy.model.ProductSpecification;
 import by.it.academy.model.SearchCriteria;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SearchService {
 
-    private ProductSpecificationDao productSpecificationDao;
+    private final ProductSpecificationDao productSpecificationDao;
 
     public SearchService() {
         this.productSpecificationDao = new ProductSpecificationDao();
