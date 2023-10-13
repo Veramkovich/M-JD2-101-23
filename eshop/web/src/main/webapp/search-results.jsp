@@ -8,6 +8,8 @@
     <a class="nav-link disabled" aria-disabled="true">Help</a>
 </nav>
 <div class="container-fluid">
+    <c:choose>
+    <c:when test="${requestScope.results.size() > 0}">
     <table class="table">
       <thead>
         <tr>
@@ -17,16 +19,22 @@
         </tr>
       </thead>
       <tbody>
+        <c:set value="0" var="count" scope="page"/>
         <c:forEach var="result" items="${requestScope.results}">
         <tr>
-            <td><a>${result}</a></td>
+            <c:set value="${pageScope.count + 1}" var="count" scope="page"/>
+            <td><a><c:out value="${count}"/></a></td>
             <td><a>${result.productName}</a></td>
             <td><a>${result.productPrice}</a></td>
         </tr>
         </c:forEach>
       </tbody>
     </table>
+    </c:when>
+    <c:otherwise>
+        <a>Products not found</a>
+    </c:otherwise>
+    </c:choose>
 </div>
-
 
 <%@include file="footer.jsp"%>

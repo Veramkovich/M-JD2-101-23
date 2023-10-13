@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "search", urlPatterns = "/search")
@@ -34,8 +35,12 @@ public class SearchServlet extends HttpServlet {
         searchCriteria.setProductNameCriteria(searchStr);
 
         //3. send query to search service
-        List<ProductSpecification> productSpecifications =
-                searchService.searchProducts(searchCriteria);
+        List<ProductSpecification> productSpecifications;
+        try {
+            productSpecifications = searchService.searchProducts(searchCriteria);
+        } catch (ClassNotFoundException|SQLException e) {
+            throw new ServletException(e);
+        }
 
         //4. get list of search results
         req.setAttribute("results", productSpecifications);
