@@ -1,8 +1,8 @@
 package by.it.academy.service;
 
 import by.it.academy.data.ProductSpecificationDao;
-import by.it.academy.model.ProductSpecification;
-import by.it.academy.model.SearchCriteria;
+import by.it.academy.service.model.ProductSpecification;
+import by.it.academy.service.model.SearchCriteria;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,8 +1,8 @@
 package by.it.academy.servlet;
 
-import by.it.academy.model.ProductSpecification;
-import by.it.academy.model.SearchCriteria;
 import by.it.academy.service.SearchService;
+import by.it.academy.service.model.ProductSpecification;
+import by.it.academy.service.model.SearchCriteria;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -1,5 +1,7 @@
 package by.it.academy.data;
 
+import by.it.academy.data.model.ProductSpecificationDto;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

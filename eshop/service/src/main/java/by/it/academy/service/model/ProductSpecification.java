@@ -1,6 +1,8 @@
-package by.it.academy.model;
+package by.it.academy.service.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class ProductSpecification implements Serializable {
 
@@ -30,5 +32,13 @@ public class ProductSpecification implements Serializable {
 
     public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        LocalDate paymentDate = LocalDate.parse("2022-07-23");
+        System.out.println(paymentDate);
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println(UUID.randomUUID());
+
     }
 }
