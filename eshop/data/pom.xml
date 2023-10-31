@@ -50,7 +50,6 @@
                 <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/eshop?createDatabaseIfNotExist=true</url>
                     <username>user</username>
                     <password>user</password>
                 </configuration>
@@ -62,6 +61,18 @@
                             <goal>update</goal>
                         </goals>
                         <configuration>
+                            <url>jdbc:mysql://localhost:3306/eshop?createDatabaseIfNotExist=true</url>
+                            <changeLogFile>src/main/resources/changelog-master.xml</changeLogFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>update_test</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306/eshop_test?createDatabaseIfNotExist=true</url>
                             <changeLogFile>src/main/resources/changelog-master.xml</changeLogFile>
                         </configuration>
                     </execution>

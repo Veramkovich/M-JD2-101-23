@@ -3,7 +3,7 @@ package by.it.academy.data;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class EShopSessionFactory {
+public class EShopTestSessionFactory {
 
     private static SessionFactory sessionFactory;
 
@@ -11,7 +11,7 @@ public class EShopSessionFactory {
         if (sessionFactory == null) {
             try {
                 sessionFactory = new Configuration()
-                        .configure("hibernate.cfg.xml")
+                        .configure("test.hibernate.cfg.xml")
                         .buildSessionFactory();
             } catch (Exception e) {
                 e.printStackTrace();
