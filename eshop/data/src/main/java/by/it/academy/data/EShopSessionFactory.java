@@ -10,6 +10,8 @@ public class EShopSessionFactory {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
+                //Configuration conf = new Configuration();
+                //conf.setPhysicalNamingStrategy(new MyPhysicalNamingStrategy());
                 sessionFactory = new Configuration()
                         .configure("hibernate.cfg.xml")
                         .buildSessionFactory();

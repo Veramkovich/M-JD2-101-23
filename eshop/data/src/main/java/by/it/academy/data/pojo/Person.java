@@ -25,6 +25,10 @@ public class Person {
     @Column(name = "DATE_OF_BIRTH")
     private Date dateOfBirth;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_DETAILS_ID")
+    private PersonDetails personDetails;
+
     public Person() {
     }
 
@@ -65,6 +69,14 @@ public class Person {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public PersonDetails getPersonDetails() {
+        return personDetails;
+    }
+
+    public void setPersonDetails(PersonDetails personDetails) {
+        this.personDetails = personDetails;
     }
 
     @Override

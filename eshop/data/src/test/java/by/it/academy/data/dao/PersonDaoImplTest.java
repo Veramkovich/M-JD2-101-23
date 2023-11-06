@@ -3,6 +3,8 @@ package by.it.academy.data.dao;
 import by.it.academy.data.EShopTestDataSource;
 import by.it.academy.data.EShopTestSessionFactory;
 import by.it.academy.data.pojo.Person;
+import by.it.academy.data.pojo.PersonDetails;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -41,6 +43,9 @@ public class PersonDaoImplTest {
         Person person = new Person(
                 null, "John", "Smith", new Date()
         );
+        PersonDetails personDetails = new PersonDetails();
+        personDetails.setMobileNumber("+375296789876");
+        person.setPersonDetails(personDetails);
 
         // When
         String savedId = personDao.saveNewPerson(person);
@@ -114,7 +119,9 @@ public class PersonDaoImplTest {
         conn.close();
     }
 
-    @org.junit.Test
+    @Test
+    @Ignore("Not implemented")
     public void readAll() {
+        assertTrue(true);
     }
 }

@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 public class PersonDaoImpl implements PersonDao {
 
     private final SessionFactory sessionFactory;
@@ -83,6 +85,6 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public List<Person> readAll() {
-        return null;
+        return emptyList();
     }
 }

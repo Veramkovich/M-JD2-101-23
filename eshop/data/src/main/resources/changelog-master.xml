@@ -54,5 +54,18 @@
         </sql>
     </changeSet>
 
+    <changeSet id="5" author="averamkovich">
+        <sql>
+            CREATE TABLE T_PERSON_DETAILS (
+            ID varchar(255) NOT NULL,
+            MOBILE_NUMBER varchar(255) DEFAULT NULL,
+            PRIMARY KEY (`ID`)
+            );
+            ALTER TABLE T_PERSON ADD COLUMN PERSON_DETAILS_ID VARCHAR(255) NULL AFTER LAST_NAME;
+            ALTER TABLE T_PERSON ADD CONSTRAINT `fk_t_person_details_id` FOREIGN KEY (PERSON_DETAILS_ID)
+            REFERENCES T_PERSON_DETAILS (ID);
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>
