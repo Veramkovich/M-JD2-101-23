@@ -10,8 +10,8 @@ import java.util.Objects;
 public class PersonDetails {
 
     @Id
-    @GenericGenerator(strategy = "uuid", name = "person_uuid")
-    @GeneratedValue(generator = "person_uuid")
+    @GenericGenerator(strategy = "uuid", name = "person_details_uuid")
+    @GeneratedValue(generator = "person_details_uuid")
     @Column(name = "ID")
     private String id;
 

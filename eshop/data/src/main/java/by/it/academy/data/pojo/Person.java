@@ -29,6 +29,10 @@ public class Person {
     @JoinColumn(name = "PERSON_DETAILS_ID")
     private PersonDetails personDetails;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TARGET_GROUP_ID")
+    private TargetGroup targetGroup;
+
     public Person() {
     }
 
@@ -77,6 +81,14 @@ public class Person {
 
     public void setPersonDetails(PersonDetails personDetails) {
         this.personDetails = personDetails;
+    }
+
+    public TargetGroup getTargetGroup() {
+        return targetGroup;
+    }
+
+    public void setTargetGroup(TargetGroup targetGroup) {
+        this.targetGroup = targetGroup;
     }
 
     @Override
