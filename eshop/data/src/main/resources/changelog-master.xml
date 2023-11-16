@@ -16,7 +16,7 @@
 
     <changeSet id="2" author="averamkovich">
         <sql>
-            CREATE TABLE IF NOT EXISTS product_specification (
+            CREATE TABLE IF NOT EXISTS T_PRODUCT_SPECIFICATION (
             id int NOT NULL,
             product_name varchar(150) NOT NULL,
             product_price decimal(10,2) DEFAULT NULL,
@@ -26,20 +26,20 @@
 
     <changeSet id="3" author="averamkovich">
         <sql>
-            INSERT INTO product_specification VALUES (1, 'Apple iPhone 13', 4999.99);
-            INSERT INTO product_specification VALUES (2, 'Apple iPhone 13 Pro', 5999.99);
-            INSERT INTO product_specification VALUES (3, 'Apple iPhone 14', 6999.99);
-            INSERT INTO product_specification VALUES (4, 'Apple iPhone 14 Pro', 7999.99);
-            INSERT INTO product_specification VALUES (5, 'Apple iPhone 15', 8999.99);
-            INSERT INTO product_specification VALUES (6, 'Apple iPhone 15 Pro', 9999.99);
-            INSERT INTO product_specification VALUES (7, 'Samsung Galaxy A53', 4999.99);
-            INSERT INTO product_specification VALUES (8, 'Motorola M70', 2999.99);
-            INSERT INTO product_specification VALUES (9, 'Huawei P30 Lite', 3999.99);
-            INSERT INTO product_specification VALUES (10, 'Honor 10', 1999.99);
-            INSERT INTO product_specification VALUES (11, 'Honor 20', 2999.99);
-            INSERT INTO product_specification VALUES (12, 'Honor 30', 3999.99);
-            INSERT INTO product_specification VALUES (13, 'Vivo 1018', 4999.99);
-            INSERT INTO product_specification VALUES (14, 'Mi Redmi 9', 8999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (1, 'Apple iPhone 13', 4999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (2, 'Apple iPhone 13 Pro', 5999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (3, 'Apple iPhone 14', 6999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (4, 'Apple iPhone 14 Pro', 7999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (5, 'Apple iPhone 15', 8999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (6, 'Apple iPhone 15 Pro', 9999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (7, 'Samsung Galaxy A53', 4999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (8, 'Motorola M70', 2999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (9, 'Huawei P30 Lite', 3999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (10, 'Honor 10', 1999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (11, 'Honor 20', 2999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (12, 'Honor 30', 3999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (13, 'Vivo 1018', 4999.99);
+            INSERT INTO T_PRODUCT_SPECIFICATION VALUES (14, 'Mi Redmi 9', 8999.99);
         </sql>
     </changeSet>
 

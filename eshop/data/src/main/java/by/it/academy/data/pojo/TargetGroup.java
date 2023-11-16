@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "T_TARGET_GROUP")
@@ -43,5 +44,25 @@ public class TargetGroup {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TargetGroup that = (TargetGroup) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(groupName, that.groupName)) return false;
+        return Objects.equals(persons, that.persons);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        result = 31 * result + (persons != null ? persons.hashCode() : 0);
+        return result;
     }
 }

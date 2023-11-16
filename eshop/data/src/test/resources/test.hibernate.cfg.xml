@@ -13,6 +13,8 @@
         <mapping class="by.it.academy.data.pojo.Person"/>
         <mapping class="by.it.academy.data.pojo.PersonDetails"/>
         <mapping class="by.it.academy.data.pojo.TargetGroup"/>
+        <mapping class="by.it.academy.data.pojo.Promo"/>
+        <mapping class="by.it.academy.data.pojo.ProductSpecification"/>
 
     </session-factory>
 

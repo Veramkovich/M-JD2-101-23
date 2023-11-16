@@ -1,6 +1,6 @@
 package by.it.academy.service;
 
-import by.it.academy.data.ProductSpecificationDao;
+import by.it.academy.data.dao.ProductSpecificationDaoImpl;
 import by.it.academy.service.model.ProductSpecification;
 import by.it.academy.service.model.SearchCriteria;
 
@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 
 public class SearchService {
 
-    private final ProductSpecificationDao productSpecificationDao;
+    private final ProductSpecificationDaoImpl productSpecificationDaoImpl;
 
     public SearchService() {
-        this.productSpecificationDao = new ProductSpecificationDao();
+        this.productSpecificationDaoImpl = new ProductSpecificationDaoImpl();
     }
 
     public List<ProductSpecification> searchProducts(SearchCriteria searchCriteria) throws SQLException, ClassNotFoundException {
-        return productSpecificationDao
+        return productSpecificationDaoImpl
                 .read()
                 .stream()
                 .map(dto -> new ProductSpecification(dto.getProductName(), dto.getProductPrice()))
