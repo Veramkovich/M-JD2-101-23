@@ -3,6 +3,7 @@ package by.it.academy.data.dao;
 import by.it.academy.data.EShopDataSource;
 import by.it.academy.data.model.ProductSpecificationDto;
 import by.it.academy.data.pojo.ProductSpecification;
+import by.it.academy.data.pojo.Promo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
@@ -49,17 +51,34 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     @Override
     public void create(ProductSpecificationDto productSpecificationDto) {
-        Session session = null;
         Transaction transaction = null;
-        ProductSpecification productSpecification = new ProductSpecification(
-                productSpecificationDto.getId().intValue(),
-                productSpecificationDto.getProductName(),
-                productSpecificationDto.getProductPrice()
-        );
+        final Session session = sessionFactory.openSession();
         try {
-            session = sessionFactory.openSession();
+            ProductSpecification productSpecification = new ProductSpecification(
+                    productSpecificationDto.getId().intValue(),
+                    productSpecificationDto.getProductName(),
+                    productSpecificationDto.getProductPrice()
+            );
+            productSpecification.setPromoList(productSpecificationDto
+                    .getPromos()
+                    .stream()
+                    .map(promoDto -> {
+                        Promo promo = session.find(Promo.class, promoDto.getId());
+                        if (promo == null) {
+                            promo = new Promo(
+                                    promoDto.getId(),
+                                    promoDto.getPromoName(),
+                                    promoDto.getStartDate(),
+                                    promoDto.getEndDate());
+                        }
+                        return promo;
+                    })
+                    .peek(promo -> promo.getProducts().add(productSpecification))
+                    .collect(Collectors.toList())
+            );
+
             transaction = session.beginTransaction();
-            int savedId = (Integer) session.save(productSpecification);//Some work
+            session.saveOrUpdate(productSpecification);//Some work
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

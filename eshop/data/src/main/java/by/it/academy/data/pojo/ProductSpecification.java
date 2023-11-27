@@ -17,7 +17,9 @@ public class ProductSpecification {
     @Column(name = "product_price")
     private double productPrice;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = {
+            CascadeType.ALL
+    })
     private List<Promo> promoList;
 
     public ProductSpecification() {

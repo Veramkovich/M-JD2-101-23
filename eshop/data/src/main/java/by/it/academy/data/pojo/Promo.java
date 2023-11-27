@@ -1,6 +1,7 @@
 package by.it.academy.data.pojo;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +22,9 @@ public class Promo {
     @Column(name = "end_date")
     private Date endDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    })
     @JoinTable(
             name = "T_PRODUCT_PROMO",
             joinColumns = @JoinColumn(name = "PROMO_ID"),
@@ -30,9 +33,11 @@ public class Promo {
     private List<ProductSpecification> products;
 
     public Promo() {
+        products = new ArrayList<>();
     }
 
     public Promo(int id, String promoName, Date startDate, Date endDate) {
+        this();
         this.id = id;
         this.promoName = promoName;
         this.startDate = startDate;

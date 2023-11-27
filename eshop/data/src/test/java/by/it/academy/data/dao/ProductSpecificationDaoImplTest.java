@@ -27,14 +27,16 @@ public class ProductSpecificationDaoImplTest {
                 EShopTestSessionFactory.getSessionFactory()
         );
         conn = EShopTestDataSource.getConnection();
+        conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_PROMO;");
         conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");
+        conn.createStatement().executeUpdate("DELETE FROM T_PROMO;");
     }
 
     @After
     public void tearDown() throws Exception {
         productSpecificationDao = null;
-        conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");
-        conn.close();
+        //conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");
+        //conn.close();
     }
 
     @Test
@@ -88,14 +90,32 @@ public class ProductSpecificationDaoImplTest {
                 new SimpleDateFormat("yyyy-MM-dd").parse("2023-11-17")
         );
 
+        product1.getPromos().add(promoDto1);
+        product2.getPromos().add(promoDto2);
+        product3.getPromos().add(promoDto1);
+        product3.getPromos().add(promoDto2);
+
         //When
-        //productSpecificationDao.create(dto);
+        productSpecificationDao.create(product1);
+        productSpecificationDao.create(product2);
+        productSpecificationDao.create(product3);
+
 
         //Then
         ResultSet rs = conn.createStatement().executeQuery("SELECT count(*) FROM T_PRODUCT_SPECIFICATION");
         rs.next();
         int actualCount = rs.getInt(1);
-        //assertEquals(1, actualCount);
+        assertEquals(3, actualCount);
+
+        rs = conn.createStatement().executeQuery("SELECT count(*) FROM T_PROMO");
+        rs.next();
+        actualCount = rs.getInt(1);
+        assertEquals(2, actualCount);
+
+        rs = conn.createStatement().executeQuery("SELECT count(*) FROM T_PRODUCT_PROMO");
+        rs.next();
+        actualCount = rs.getInt(1);
+        assertEquals(4, actualCount);
     }
 
     @Test

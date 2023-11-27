@@ -12,6 +12,6 @@ public interface PersonDao {
 
     boolean deletePersonById(String id);
 
-    List<Person> readAll();
+    List<Person> readAll(int startPosition, int pageSize);
 
 }

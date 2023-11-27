@@ -7,8 +7,6 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-import static java.util.Collections.emptyList;
-
 public class PersonDaoImpl implements PersonDao {
 
     private final SessionFactory sessionFactory;
@@ -84,7 +82,19 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public List<Person> readAll() {
-        return emptyList();
+    public List<Person> readAll(int startPosition, int pageSize) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            return session.createQuery("from Person", Person.class)
+                    .setFirstResult(startPosition)
+                    .setMaxResults(pageSize)
+                    .list();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (session != null) session.close();
+        }
     }
 }
