@@ -86,7 +86,7 @@ public class PersonDaoImpl implements PersonDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            return session.createQuery("from Person", Person.class)
+            return session.createQuery("from Person order by firstName, lastName", Person.class)
                     .setFirstResult(startPosition)
                     .setMaxResults(pageSize)
                     .list();

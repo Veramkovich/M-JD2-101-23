@@ -5,13 +5,13 @@ import by.it.academy.data.EShopTestSessionFactory;
 import by.it.academy.data.pojo.Person;
 import by.it.academy.data.pojo.PersonDetails;
 import by.it.academy.data.pojo.TargetGroup;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -151,8 +151,31 @@ public class PersonDaoImplTest {
     }
 
     @Test
-    @Ignore("Not implemented")
-    public void readAll() {
-        assertTrue(true);
+    public void readAll() throws SQLException, ClassNotFoundException {
+        // Given
+        Connection conn = EShopTestDataSource.getConnection();
+        for (int i = 0; i < 10; i++) {
+            String testId = UUID.randomUUID().toString();
+            conn.createStatement().executeUpdate("INSERT INTO t_person" +
+                    "(PERSON_ID," +
+                    "DATE_OF_BIRTH," +
+                    "FIRST_NAME," +
+                    "LAST_NAME)" +
+                    "VALUES" +
+                    "('" + testId + "'," +
+                    "'1980-01-01'," +
+                    "'Ivan" + i + "'," +
+                    "'Petrov');");
+        }
+        conn.close();
+
+        // When
+        List<Person> people = personDao.readAll(2, 3);
+
+        // Then
+        assertEquals(3, people.size());
+        assertEquals("Ivan2", people.get(0).getFirstName());
+        assertEquals("Ivan3", people.get(1).getFirstName());
+        assertEquals("Ivan4", people.get(2).getFirstName());
     }
 }
