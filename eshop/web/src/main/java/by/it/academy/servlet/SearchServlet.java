@@ -1,6 +1,7 @@
 package by.it.academy.servlet;
 
 import by.it.academy.service.SearchService;
+import by.it.academy.service.SearchServiceImpl;
 import by.it.academy.service.model.ProductSpecification;
 import by.it.academy.service.model.SearchCriteria;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,7 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     public void init() {
-        searchService = new SearchService();
+        searchService = new SearchServiceImpl();
     }
 
     @Override
