@@ -4,7 +4,6 @@ import by.it.academy.data.dao.ProductSpecificationDao;
 import by.it.academy.service.model.ProductSpecification;
 import by.it.academy.service.model.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 public class SearchServiceImpl implements SearchService {
 
     @Autowired
-    @Qualifier("DAO2")
     private ProductSpecificationDao productSpecificationDao;
 
     @Override
