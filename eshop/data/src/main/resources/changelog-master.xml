@@ -7,20 +7,22 @@
 
     <changeSet id="1" author="averamkovich">
         <sql>
-            CREATE TABLE IF NOT EXISTS delivery_type (
-            id INT NOT NULL,
-            delivery_name VARCHAR(45) NULL,
-            PRIMARY KEY (id));
+            CREATE TABLE IF NOT EXISTS T_DELIVERY_TYPE (
+            ID INT NOT NULL,
+            DELIVERY_NAME VARCHAR(45) NULL,
+            PRIMARY KEY (ID)
+            );
         </sql>
     </changeSet>
 
     <changeSet id="2" author="averamkovich">
         <sql>
             CREATE TABLE IF NOT EXISTS T_PRODUCT_SPECIFICATION (
-            id int NOT NULL,
-            product_name varchar(150) NOT NULL,
-            product_price decimal(10,2) DEFAULT NULL,
-            PRIMARY KEY (id));
+            ID INT NOT NULL,
+            PRODUCT_NAME VARCHAR(150) NOT NULL,
+            PRODUCT_PRICE DECIMAL(10,2) DEFAULT NULL,
+            PRIMARY KEY (ID)
+            );
         </sql>
     </changeSet>
 
@@ -46,26 +48,75 @@
     <changeSet id="4" author="averamkovich">
         <sql>
             CREATE TABLE IF NOT EXISTS T_PERSON (
-            PERSON_ID varchar(255) not null,
-            DATE_OF_BIRTH datetime(6),
-            FIRST_NAME varchar(255),
-            LAST_NAME varchar(255),
-            primary key (PERSON_ID));
+            PERSON_ID VARCHAR(255) NOT NULL,
+            DATE_OF_BIRTH DATETIME(6),
+            FIRST_NAME VARCHAR(255),
+            LAST_NAME VARCHAR(255),
+            PRIMARY KEY (PERSON_ID)
+            );
         </sql>
     </changeSet>
 
     <changeSet id="5" author="averamkovich">
         <sql>
             CREATE TABLE T_PERSON_DETAILS (
-            ID varchar(255) NOT NULL,
-            MOBILE_NUMBER varchar(255) DEFAULT NULL,
-            PRIMARY KEY (`ID`)
+            ID VARCHAR(255) NOT NULL,
+            MOBILE_NUMBER VARCHAR(255) DEFAULT NULL,
+            PRIMARY KEY (ID)
             );
-            ALTER TABLE T_PERSON ADD COLUMN PERSON_DETAILS_ID VARCHAR(255) NULL AFTER LAST_NAME;
-            ALTER TABLE T_PERSON ADD CONSTRAINT `fk_t_person_details_id` FOREIGN KEY (PERSON_DETAILS_ID)
+            ALTER TABLE T_PERSON
+            ADD COLUMN PERSON_DETAILS_ID VARCHAR(255) NULL AFTER LAST_NAME;
+            ALTER TABLE T_PERSON
+            ADD CONSTRAINT FK_T_PERSON_DETAILS_ID FOREIGN KEY (PERSON_DETAILS_ID)
             REFERENCES T_PERSON_DETAILS (ID);
         </sql>
     </changeSet>
 
+    <changeSet id="6" author="averamkovich">
+        <sql>
+            CREATE TABLE T_PROMO (
+            ID INT NOT NULL,
+            END_DATE DATETIME(6) DEFAULT NULL,
+            PROMO_NAME VARCHAR(150) NOT NULL,
+            START_DATE DATETIME(6) DEFAULT NULL,
+            PRIMARY KEY (ID)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="7" author="averamkovich">
+        <sql>
+            CREATE TABLE T_PRODUCT_PROMO (
+            PROMO_ID INT NOT NULL,
+            PRODUCT_ID INT NOT NULL,
+            KEY FK_T_PRODUCT_SPECIFICATION_ID (PRODUCT_ID),
+            KEY FK_T_PROMO_ID (PROMO_ID),
+            CONSTRAINT FK_T_PRODUCT_SPECIFICATION_ID FOREIGN KEY (PRODUCT_ID)
+            REFERENCES T_PRODUCT_SPECIFICATION (ID),
+            CONSTRAINT FK_T_PROMO_ID FOREIGN KEY (PROMO_ID)
+            REFERENCES T_PROMO (ID)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="8" author="averamkovich">
+        <sql>
+            CREATE TABLE T_TARGET_GROUP (
+            ID VARCHAR(255) NOT NULL,
+            GROUP_NAME VARCHAR(255) DEFAULT NULL,
+            PRIMARY KEY (ID)
+            )
+        </sql>
+    </changeSet>
+
+    <changeSet id="9" author="averamkovich">
+        <sql>
+            ALTER TABLE T_PERSON
+            ADD COLUMN TARGET_GROUP_ID VARCHAR(255) NULL AFTER PERSON_DETAILS_ID;
+            ALTER TABLE T_PERSON
+            ADD CONSTRAINT FK_T_TARGET_GROUP_ID FOREIGN KEY (TARGET_GROUP_ID)
+            REFERENCES T_TARGET_GROUP (ID);
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>

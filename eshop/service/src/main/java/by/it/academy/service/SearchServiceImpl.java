@@ -5,6 +5,7 @@ import by.it.academy.service.model.ProductSpecification;
 import by.it.academy.service.model.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,6 +18,7 @@ public class SearchServiceImpl implements SearchService {
     private ProductSpecificationDao productSpecificationDao;
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductSpecification> searchProducts(SearchCriteria searchCriteria) throws SQLException, ClassNotFoundException {
         return productSpecificationDao
                 .read()

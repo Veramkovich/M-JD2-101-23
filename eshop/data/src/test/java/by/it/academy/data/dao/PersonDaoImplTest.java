@@ -2,10 +2,18 @@ package by.it.academy.data.dao;
 
 import by.it.academy.data.EShopTestDataSource;
 import by.it.academy.data.EShopTestSessionFactory;
+import by.it.academy.data.TestDataConfiguration;
 import by.it.academy.data.pojo.Person;
 import by.it.academy.data.pojo.PersonDetails;
 import by.it.academy.data.pojo.TargetGroup;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,13 +24,17 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TestDataConfiguration.class)
+@TestPropertySource(value = "classpath:test.liquibase.properties")
 public class PersonDaoImplTest {
 
+    @Autowired
     PersonDao personDao;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
-        personDao = new PersonDaoImpl(EShopTestSessionFactory.getSessionFactory());
+        //personDao = new PersonDaoImpl(EShopTestSessionFactory.getSessionFactory());
         Connection conn = EShopTestDataSource.getConnection();
         conn.createStatement().executeUpdate("DELETE FROM T_PERSON;");
         conn.createStatement().executeUpdate("DELETE FROM T_TARGET_GROUP;");
@@ -30,7 +42,7 @@ public class PersonDaoImplTest {
 
     }
 
-    @org.junit.After
+    @After
     public void tearDown() throws Exception {
         personDao = null;
         Connection conn = EShopTestDataSource.getConnection();

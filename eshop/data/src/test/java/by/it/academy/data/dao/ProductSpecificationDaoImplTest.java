@@ -1,12 +1,17 @@
 package by.it.academy.data.dao;
 
 import by.it.academy.data.EShopTestDataSource;
-import by.it.academy.data.EShopTestSessionFactory;
+import by.it.academy.data.TestDataConfiguration;
 import by.it.academy.data.model.ProductSpecificationDto;
 import by.it.academy.data.model.PromoDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,16 +21,20 @@ import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TestDataConfiguration.class)
+@TestPropertySource(value = "classpath:test.liquibase.properties")
 public class ProductSpecificationDaoImplTest {
 
+    @Autowired
     ProductSpecificationDao productSpecificationDao;
     Connection conn;
 
     @Before
     public void setUp() throws Exception {
-        productSpecificationDao = new ProductSpecificationDaoImpl(
-                EShopTestSessionFactory.getSessionFactory()
-        );
+        //productSpecificationDao = new ProductSpecificationDaoImpl(
+        //        EShopTestSessionFactory.getSessionFactory()
+        //);
         conn = EShopTestDataSource.getConnection();
         conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_PROMO;");
         conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");

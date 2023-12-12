@@ -6,7 +6,9 @@ import by.it.academy.data.pojo.ProductSpecification;
 import by.it.academy.data.pojo.Promo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,14 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
+@Transactional
 public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     private final SessionFactory sessionFactory;
 
-    public ProductSpecificationDaoImpl() {
-        sessionFactory = null;
-    }
-
+    @Autowired
     public ProductSpecificationDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -51,41 +52,41 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     @Override
     public void create(ProductSpecificationDto productSpecificationDto) {
-        Transaction transaction = null;
-        final Session session = sessionFactory.openSession();
-        try {
-            ProductSpecification productSpecification = new ProductSpecification(
-                    productSpecificationDto.getId().intValue(),
-                    productSpecificationDto.getProductName(),
-                    productSpecificationDto.getProductPrice()
-            );
-            productSpecification.setPromoList(productSpecificationDto
-                    .getPromos()
-                    .stream()
-                    .map(promoDto -> {
-                        Promo promo = session.find(Promo.class, promoDto.getId());
-                        if (promo == null) {
-                            promo = new Promo(
-                                    promoDto.getId(),
-                                    promoDto.getPromoName(),
-                                    promoDto.getStartDate(),
-                                    promoDto.getEndDate());
-                        }
-                        return promo;
-                    })
-                    .peek(promo -> promo.getProducts().add(productSpecification))
-                    .collect(Collectors.toList())
-            );
+        //Transaction transaction = null;
+        final Session session = sessionFactory.getCurrentSession();
+        //try {
+        ProductSpecification productSpecification = new ProductSpecification(
+                productSpecificationDto.getId().intValue(),
+                productSpecificationDto.getProductName(),
+                productSpecificationDto.getProductPrice()
+        );
+        productSpecification.setPromoList(productSpecificationDto
+                .getPromos()
+                .stream()
+                .map(promoDto -> {
+                    Promo promo = session.find(Promo.class, promoDto.getId());
+                    if (promo == null) {
+                        promo = new Promo(
+                                promoDto.getId(),
+                                promoDto.getPromoName(),
+                                promoDto.getStartDate(),
+                                promoDto.getEndDate());
+                    }
+                    return promo;
+                })
+                .peek(promo -> promo.getProducts().add(productSpecification))
+                .collect(Collectors.toList())
+        );
 
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(productSpecification);//Some work
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
-        } finally {
-            if (session != null) session.close();
-        }
+        //    transaction = session.beginTransaction();
+        session.saveOrUpdate(productSpecification);//Some work
+        //    transaction.commit();
+        //} catch (Exception e) {
+        //    if (transaction != null) transaction.rollback();
+        //    throw new RuntimeException(e);
+        //} finally {
+        //    if (session != null) session.close();
+        //}
     }
 
     @Override

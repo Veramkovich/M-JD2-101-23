@@ -47,6 +47,26 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+        <!-- Connection pool -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -64,10 +84,7 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>4.23.0</version>
                 <configuration>
-                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                    <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <username>user</username>
-                    <password>user</password>
+                    <changeLogFile>src/main/resources/changelog-master.xml</changeLogFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -77,8 +94,7 @@
                             <goal>update</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/eshop?createDatabaseIfNotExist=true</url>
-                            <changeLogFile>src/main/resources/changelog-master.xml</changeLogFile>
+                            <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                         </configuration>
                     </execution>
                     <execution>
@@ -88,7 +104,7 @@
                             <goal>update</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/eshop_test?createDatabaseIfNotExist=true</url>
+                            <propertyFile>src/test/resources/test.liquibase.properties</propertyFile>
                             <changeLogFile>src/main/resources/changelog-master.xml</changeLogFile>
                         </configuration>
                     </execution>
