@@ -1,11 +1,12 @@
 package by.it.academy.servlet;
-import java.io.*;
-import java.util.Date;
-import java.util.Enumeration;
 
-import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.Enumeration;
 
 @WebServlet(name = "HelloWorld", urlPatterns = "/hello")
 public class HelloWorld extends HttpServlet {

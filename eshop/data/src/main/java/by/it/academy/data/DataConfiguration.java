@@ -4,6 +4,7 @@ import by.it.academy.data.pojo.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -61,7 +62,7 @@ public class DataConfiguration {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource,
-                                                  Properties hibernateProperties) {
+                                                  @Qualifier("hibernateProperties") Properties hibernateProperties) {
         LocalSessionFactoryBean sessionFactory =
                 new LocalSessionFactoryBean();
 
