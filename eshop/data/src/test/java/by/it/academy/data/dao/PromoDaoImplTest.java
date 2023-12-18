@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestDataConfiguration.class)
@@ -61,6 +62,7 @@ public class PromoDaoImplTest {
         );
 
         // When
+        assertNotNull(promoDao);
         promoDao.create(promoDto1);
         promoDao.create(promoDto2);
 

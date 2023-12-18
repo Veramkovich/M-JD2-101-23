@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -23,10 +22,14 @@ public class SearchServiceImpl implements SearchService {
         return productSpecificationDao
                 .read()
                 .stream()
-                .map(dto -> new ProductSpecification(dto.getProductName(), dto.getProductPrice()))
+                .map(dto -> new ProductSpecification(
+                        dto.getProductName(),
+                        dto.getProductPrice(),
+                        dto.getId())
+                )
                 .filter(productSpecification ->
                         productSpecification.getProductName().contains(searchCriteria.getProductNameCriteria()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

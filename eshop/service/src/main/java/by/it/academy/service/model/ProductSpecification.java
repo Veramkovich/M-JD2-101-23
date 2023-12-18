@@ -1,10 +1,10 @@
 package by.it.academy.service.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.UUID;
 
 public class ProductSpecification implements Serializable {
+
+    private Long id;
 
     private String productName;
 
@@ -13,9 +13,10 @@ public class ProductSpecification implements Serializable {
     public ProductSpecification() {
     }
 
-    public ProductSpecification(String productName, Double productPrice) {
+    public ProductSpecification(String productName, Double productPrice, Long id) {
         this.productName = productName;
         this.productPrice = productPrice;
+        this.id = id;
     }
 
     public String getProductName() {
@@ -34,11 +35,11 @@ public class ProductSpecification implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
-        LocalDate paymentDate = LocalDate.parse("2022-07-23");
-        System.out.println(paymentDate);
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        System.out.println(UUID.randomUUID());
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
     }
 }
