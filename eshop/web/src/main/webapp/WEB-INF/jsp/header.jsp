@@ -11,5 +11,6 @@
 <nav class="nav">
     <a class="nav-link" href="/web">Home</a>
     <a class="nav-link active" aria-current="page" href="/web/search">Search for Product</a>
+    <a class="nav-link active" aria-current="page" href="/web/add">Add a New Product</a>
     <a class="nav-link disabled" aria-disabled="true">Help</a>
 </nav>

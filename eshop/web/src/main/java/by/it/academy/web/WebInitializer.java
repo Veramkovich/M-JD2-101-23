@@ -2,10 +2,7 @@ package by.it.academy.web;
 
 import by.it.academy.data.DataConfiguration;
 import by.it.academy.service.ServiceConfiguration;
-import jakarta.servlet.ServletContainerInitializer;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRegistration;
+import jakarta.servlet.*;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -30,9 +27,9 @@ public class WebInitializer implements ServletContainerInitializer {
                 ctx.addServlet("dispatcherServlet", dispatcherServlet);
         servletRegistration.setLoadOnStartup(1);
         servletRegistration.addMapping("/");
-        //servletRegistration.addMapping("*.html");
-        //servletRegistration.addMapping("*.jpg");
-        // *.view - GET
-        // *.action - POST
+
+        long maxSize = 16L * 1024 * 1024;
+        servletRegistration.setMultipartConfig(
+                new MultipartConfigElement(null, maxSize, maxSize, 0));
     }
 }

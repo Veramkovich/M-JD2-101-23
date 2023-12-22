@@ -2,6 +2,7 @@ package by.it.academy.data.pojo;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,10 @@ public class ProductSpecification {
 
     @Column(name = "product_price")
     private double productPrice;
+
+    @Column(name = "product_image")
+    @Lob
+    private byte[] productImage;
 
     @ManyToMany(mappedBy = "products", cascade = {
             CascadeType.ALL
@@ -64,6 +69,14 @@ public class ProductSpecification {
         this.promoList = promoList;
     }
 
+    public byte[] getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(byte[] productImage) {
+        this.productImage = productImage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,7 +86,8 @@ public class ProductSpecification {
 
         if (id != that.id) return false;
         if (Double.compare(that.productPrice, productPrice) != 0) return false;
-        return Objects.equals(productName, that.productName);
+        if (!Objects.equals(productName, that.productName)) return false;
+        return Arrays.equals(productImage, that.productImage);
     }
 
     @Override
@@ -84,6 +98,7 @@ public class ProductSpecification {
         result = 31 * result + (productName != null ? productName.hashCode() : 0);
         temp = Double.doubleToLongBits(productPrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + Arrays.hashCode(productImage);
         return result;
     }
 }

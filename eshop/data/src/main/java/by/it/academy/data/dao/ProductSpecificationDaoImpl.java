@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @Transactional
@@ -56,10 +55,11 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
         final Session session = sessionFactory.getCurrentSession();
         //try {
         ProductSpecification productSpecification = new ProductSpecification(
-                productSpecificationDto.getId().intValue(),
+                productSpecificationDto.getId() == null ? getMaxProductId() : productSpecificationDto.getId().intValue(),
                 productSpecificationDto.getProductName(),
                 productSpecificationDto.getProductPrice()
         );
+        productSpecification.setProductImage(productSpecificationDto.getProductImage());
         productSpecification.setPromoList(productSpecificationDto
                 .getPromos()
                 .stream()
@@ -75,7 +75,7 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
                     return promo;
                 })
                 .peek(promo -> promo.getProducts().add(productSpecification))
-                .collect(Collectors.toList())
+                .toList()
         );
 
         //    transaction = session.beginTransaction();
@@ -87,6 +87,14 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
         //} finally {
         //    if (session != null) session.close();
         //}
+    }
+
+    public int getMaxProductId() {
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("select max(id) from ProductSpecification", Integer.class)
+                .list()
+                .get(0);
     }
 
     @Override

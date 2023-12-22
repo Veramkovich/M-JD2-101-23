@@ -62,6 +62,8 @@ public class ProductSpecificationDaoImplTest {
         ProductSpecificationDto dto = new ProductSpecificationDto(
                 1L, "iPhone 15", 5999.99
         );
+        byte[] bytes = {1, 1, 1};
+        dto.setProductImage(bytes);
 
         //When
         productSpecificationDao.create(dto);

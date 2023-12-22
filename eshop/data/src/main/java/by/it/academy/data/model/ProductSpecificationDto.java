@@ -9,6 +9,7 @@ public final class ProductSpecificationDto implements Serializable {
     private final Long id;
     private final String productName;
     private final Double productPrice;
+    private byte[] productImage;
 
     private final List<PromoDto> promos;
 
@@ -33,5 +34,13 @@ public final class ProductSpecificationDto implements Serializable {
 
     public List<PromoDto> getPromos() {
         return promos;
+    }
+
+    public byte[] getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(byte[] productImage) {
+        this.productImage = productImage;
     }
 }
