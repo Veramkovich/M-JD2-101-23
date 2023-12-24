@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
+    @SuppressWarnings("unused")
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/jsp/");
@@ -36,6 +37,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
+    @SuppressWarnings("unused")
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }

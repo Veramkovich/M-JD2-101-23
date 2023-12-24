@@ -32,9 +32,6 @@ public class ProductSpecificationDaoImplTest {
 
     @Before
     public void setUp() throws Exception {
-        //productSpecificationDao = new ProductSpecificationDaoImpl(
-        //        EShopTestSessionFactory.getSessionFactory()
-        //);
         conn = EShopTestDataSource.getConnection();
         conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_PROMO;");
         conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");
@@ -44,8 +41,6 @@ public class ProductSpecificationDaoImplTest {
     @After
     public void tearDown() throws Exception {
         productSpecificationDao = null;
-        //conn.createStatement().executeUpdate("DELETE FROM T_PRODUCT_SPECIFICATION;");
-        //conn.close();
     }
 
     @Test

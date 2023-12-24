@@ -13,8 +13,16 @@ import java.util.List;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-    @Autowired
+
     private ProductSpecificationDao productSpecificationDao;
+
+    public SearchServiceImpl() {
+    }
+
+    @Autowired
+    public SearchServiceImpl(ProductSpecificationDao productSpecificationDao) {
+        this.productSpecificationDao = productSpecificationDao;
+    }
 
     @Override
     @Transactional(readOnly = true)

@@ -18,6 +18,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+@SuppressWarnings("unused")
 public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     private final SessionFactory sessionFactory;
@@ -29,19 +30,19 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     @Override
     public List<ProductSpecificationDto> read() throws SQLException, ClassNotFoundException {
-        Statement statement = EShopDataSource.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from T_PRODUCT_SPECIFICATION");
-
-        List<ProductSpecificationDto> products = new ArrayList<>();
-        while (resultSet.next()) {
-            Long id = resultSet.getLong("id");
-            String productName = resultSet.getString("product_name");
-            Double productPrice = resultSet.getDouble("product_price");
-            products.add(new ProductSpecificationDto(id, productName, productPrice));
+        try (
+                Statement statement = EShopDataSource.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery("select * from T_PRODUCT_SPECIFICATION");
+        ) {
+            List<ProductSpecificationDto> products = new ArrayList<>();
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String productName = resultSet.getString("product_name");
+                Double productPrice = resultSet.getDouble("product_price");
+                products.add(new ProductSpecificationDto(id, productName, productPrice));
+            }
+            return products;
         }
-        resultSet.close();
-        statement.close();
-        return products;
     }
 
     @Override
@@ -50,10 +51,9 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void create(ProductSpecificationDto productSpecificationDto) {
-        //Transaction transaction = null;
         final Session session = sessionFactory.getCurrentSession();
-        //try {
         ProductSpecification productSpecification = new ProductSpecification(
                 productSpecificationDto.getId() == null ? getMaxProductId() : productSpecificationDto.getId().intValue(),
                 productSpecificationDto.getProductName(),
@@ -77,16 +77,7 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
                 .peek(promo -> promo.getProducts().add(productSpecification))
                 .toList()
         );
-
-        //    transaction = session.beginTransaction();
-        session.saveOrUpdate(productSpecification);//Some work
-        //    transaction.commit();
-        //} catch (Exception e) {
-        //    if (transaction != null) transaction.rollback();
-        //    throw new RuntimeException(e);
-        //} finally {
-        //    if (session != null) session.close();
-        //}
+        session.saveOrUpdate(productSpecification); //Some work
     }
 
     public int getMaxProductId() {
@@ -99,10 +90,12 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
 
     @Override
     public void update(ProductSpecificationDto productSpecificationDto) {
+        this.create(productSpecificationDto);
     }
 
     @Override
     public void delete(ProductSpecificationDto productSpecificationDto) {
+        //TODO: implement delete
     }
 
 

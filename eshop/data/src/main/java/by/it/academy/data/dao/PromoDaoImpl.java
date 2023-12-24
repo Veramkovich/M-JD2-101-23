@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+@SuppressWarnings("unused")
 public class PromoDaoImpl implements PromoDao {
 
     private final SessionFactory sessionFactory;
@@ -23,31 +24,20 @@ public class PromoDaoImpl implements PromoDao {
 
     @Override
     public void create(PromoDto promoDto) {
-        Session session = null;
-        //Transaction transaction = null;
+        Session session;
         Promo promo = new Promo(
                 promoDto.getId(),
                 promoDto.getPromoName(),
                 promoDto.getStartDate(),
                 promoDto.getEndDate()
         );
-        //try {
         session = sessionFactory.getCurrentSession();
-        //    transaction = session.beginTransaction();
         int savedId = (Integer) session.save(promo);//Some work
-        //    transaction.commit();
-        //} catch (Exception e) {
-        //    if (transaction != null) transaction.rollback();
-        //    throw new RuntimeException(e);
-        //} finally {
-        //    if (session != null) session.close();
-        //}
-
     }
 
     @Override
     public void update(PromoDto promoDto) {
-
+        //TODO: implement update
     }
 
     @Override

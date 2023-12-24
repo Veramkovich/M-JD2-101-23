@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
     ProductSpecificationDao productSpecificationDao;
+
+    @Autowired
+    public ProductServiceImpl(ProductSpecificationDao productSpecificationDao) {
+        this.productSpecificationDao = productSpecificationDao;
+    }
 
     @Override
     public void saveNewProduct(ProductSpecification productSpecification, byte[] productImage) {
