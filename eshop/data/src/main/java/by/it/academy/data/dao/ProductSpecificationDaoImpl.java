@@ -46,8 +46,15 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProductSpecificationDto readById(Long id) {
-        return null;
+        final Session session = sessionFactory.getCurrentSession();
+        ProductSpecification pojo = session.find(ProductSpecification.class, id);
+        return new ProductSpecificationDto(
+                pojo != null ? (long) pojo.getId() : null,
+                pojo != null ? pojo.getProductName() : "",
+                pojo != null ? pojo.getProductPrice() : null
+        );
     }
 
     @Override
@@ -55,7 +62,7 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
     public void create(ProductSpecificationDto productSpecificationDto) {
         final Session session = sessionFactory.getCurrentSession();
         ProductSpecification productSpecification = new ProductSpecification(
-                productSpecificationDto.getId() == null ? getMaxProductId() : productSpecificationDto.getId().intValue(),
+                productSpecificationDto.getId() == null ? getMaxProductId() + 1 : productSpecificationDto.getId().intValue(),
                 productSpecificationDto.getProductName(),
                 productSpecificationDto.getProductPrice()
         );
@@ -96,6 +103,16 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
     @Override
     public void delete(ProductSpecificationDto productSpecificationDto) {
         //TODO: implement delete
+    }
+
+    @Override
+    public byte[] readProductImageById(long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        ProductSpecification pojo = session.find(ProductSpecification.class, id);
+        if (pojo != null) {
+            return pojo.getProductImage();
+        }
+        return new byte[0];
     }
 
 

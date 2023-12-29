@@ -7,4 +7,7 @@ public interface ProductService {
 
     void saveNewProduct(ProductSpecification productSpecification, byte[] productImage);
 
+    ProductSpecification getProductById(int productId);
+
+    byte[] getProductImageById(Integer id);
 }

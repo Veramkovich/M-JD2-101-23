@@ -26,4 +26,18 @@ public class ProductServiceImpl implements ProductService {
         dto.setProductImage(productImage);
         productSpecificationDao.create(dto);
     }
+
+    public ProductSpecification getProductById(int productId) {
+        ProductSpecificationDto dto = productSpecificationDao.readById((long) productId);
+        return new ProductSpecification(
+                dto.getProductName(),
+                dto.getProductPrice(),
+                dto.getId()
+        );
+    }
+
+    @Override
+    public byte[] getProductImageById(Integer id) {
+        return productSpecificationDao.readProductImageById((long) id);
+    }
 }

@@ -15,4 +15,6 @@ public interface ProductSpecificationDao {
     void update(ProductSpecificationDto productSpecificationDto);
 
     void delete(ProductSpecificationDto productSpecificationDto);
+
+    byte[] readProductImageById(long id);
 }
