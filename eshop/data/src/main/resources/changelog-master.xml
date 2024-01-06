@@ -126,4 +126,22 @@
         </sql>
     </changeSet>
 
+    <changeSet id="11" author="averamkovich">
+        <sql>
+            CREATE TABLE IF NOT EXISTS T_APPLICATION_USER (
+            USER_ID VARCHAR(255) NOT NULL,
+            USER_NAME VARCHAR(255),
+            USER_PASSWORD VARCHAR(255),
+            USER_ROLE VARCHAR(255),
+            PRIMARY KEY (USER_ID)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="12" author="averamkovich">
+        <sql>
+            INSERT INTO T_APPLICATION_USER VALUES ('aaaabbbbccccddddeeeeffff00000001', 'admin', 'admin', 'ROLE_ADMIN');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

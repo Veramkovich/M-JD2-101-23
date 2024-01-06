@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +12,14 @@
 <nav class="nav">
     <a class="nav-link" href="/web">Home</a>
     <a class="nav-link active" aria-current="page" href="/web/search">Search for Product</a>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
     <a class="nav-link active" aria-current="page" href="/web/add">Add a New Product</a>
+</sec:authorize>
     <a class="nav-link disabled" aria-disabled="true">Help</a>
+<sec:authorize access="isAuthenticated()">
+    <a class="nav-link" href="/web/logout">Logout</a>
+</sec:authorize>
+<sec:authorize access="!isAuthenticated()">
+    <a class="nav-link" href="/web/login">Login</a>
+</sec:authorize>
 </nav>
