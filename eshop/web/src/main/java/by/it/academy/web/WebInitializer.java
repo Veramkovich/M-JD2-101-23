@@ -1,6 +1,7 @@
 package by.it.academy.web;
 
 import by.it.academy.data.DataConfiguration;
+import by.it.academy.rest.RestConfiguration;
 import by.it.academy.security.WebSecurityConfig;
 import by.it.academy.service.ServiceConfiguration;
 import jakarta.servlet.MultipartConfigElement;
@@ -23,6 +24,7 @@ public class WebInitializer implements ServletContainerInitializer {
         context.register(ServiceConfiguration.class);
         context.register(DataConfiguration.class);
         context.register(WebSecurityConfig.class);
+        context.register(RestConfiguration.class);
 
         // Init servlet for Spring MVC
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
