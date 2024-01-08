@@ -1,6 +1,6 @@
 package by.it.academy.rest;
 
-import by.it.academy.data.model.DeliveryTypeDto;
+import by.it.academy.service.model.DeliveryType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +15,12 @@ import java.util.List;
 public class DeliveryTypeRestController {
 
     @GetMapping("/deliveries/types")
-    public ResponseEntity<List<DeliveryTypeDto>> getAllDeliveryTypes() {
-        List<DeliveryTypeDto> deliveryTypes = List.of(
-                new DeliveryTypeDto(1, "Self pick up in strore"),
-                new DeliveryTypeDto(2, "Express post"),
-                new DeliveryTypeDto(3, "Courier service")
+    public ResponseEntity<List<DeliveryType>> getAllDeliveryTypes() {
+        List<DeliveryType> deliveryTypes = List.of(
+                new DeliveryType(1, "Self pick up in strore"),
+                new DeliveryType(2, "Express post"),
+                new DeliveryType(3, "Courier service")
         );
-        return new ResponseEntity<List<DeliveryTypeDto>>(deliveryTypes, HttpStatus.OK);
+        return new ResponseEntity<>(deliveryTypes, HttpStatus.OK);
     }
 }
