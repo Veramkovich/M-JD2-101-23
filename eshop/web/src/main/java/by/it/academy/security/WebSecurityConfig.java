@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/home", "/static/**", "/WEB-INF/jsp/**").permitAll()
-                        .requestMatchers("/login", "/deliveries/types").anonymous()
+                        .requestMatchers("/login", "/api/**").anonymous()
                         .requestMatchers("/logout").authenticated()
                         .requestMatchers("/add**").hasRole("ADMIN")
                         .anyRequest().authenticated()

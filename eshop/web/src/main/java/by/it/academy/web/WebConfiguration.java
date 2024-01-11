@@ -34,6 +34,11 @@ public class WebConfiguration implements WebMvcConfigurer {
 
         registry.addResourceHandler("/static/img/*.jpg")
                 .addResourceLocations("/static/img/");
+
+        // https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/installation.md
+        registry.addResourceHandler("/static/swagger/*")
+                .addResourceLocations("/static/swagger/");
+
     }
 
     @Bean

@@ -109,6 +109,52 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.7</version>
+                <dependencies>
+                    <!-- JAXB -->
+                    <!-- API, java.xml.bind module -->
+                    <dependency>
+                        <groupId>jakarta.xml.bind</groupId>
+                        <artifactId>jakarta.xml.bind-api</artifactId>
+                        <version>2.3.3</version>
+                    </dependency>
+                    <!-- Runtime, com.sun.xml.bind module -->
+                    <dependency>
+                        <groupId>org.glassfish.jaxb</groupId>
+                        <artifactId>jaxb-runtime</artifactId>
+                        <version>2.3.3</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>by.it.academy.rest</locations>
+                            <schemes>http</schemes>
+                            <host>localhost:8080</host>
+                            <basePath>/web</basePath>
+                            <outputPath>/</outputPath>
+                            <info>
+                                <title>eShop REST API</title>
+                                <version>v1</version>
+                                <description>eShop REST API</description>
+                            </info>
+                            <swaggerDirectory>src/main/webapp/static/swagger/</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class DeliveryTypeRestController {
 
-    @GetMapping("/deliveries/types")
+    @GetMapping("/api/deliveries/types")
     public ResponseEntity<List<DeliveryType>> getAllDeliveryTypes() {
         List<DeliveryType> deliveryTypes = List.of(
                 new DeliveryType(1, "Self pick up in strore"),
