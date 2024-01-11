@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -32,17 +33,25 @@ public class PromoDaoImpl implements PromoDao {
                 promoDto.getEndDate()
         );
         session = sessionFactory.getCurrentSession();
-        int savedId = (Integer) session.save(promo);//Some work
+        session.persist(promo);
     }
 
     @Override
     public void update(PromoDto promoDto) {
-        //TODO: implement update
+        sessionFactory
+                .getCurrentSession()
+                .merge(new Promo(
+                                promoDto.getId(),
+                                promoDto.getPromoName(),
+                                promoDto.getStartDate(),
+                                promoDto.getEndDate()
+                        )
+                );
     }
 
     @Override
     public List<PromoDto> getAllPromos() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ProductSpecificationDaoImpl implements ProductSpecificationDao {
     public List<ProductSpecificationDto> read() throws SQLException, ClassNotFoundException {
         try (
                 Statement statement = EShopDataSource.getConnection().createStatement();
-                ResultSet resultSet = statement.executeQuery("select * from T_PRODUCT_SPECIFICATION");
+                ResultSet resultSet = statement.executeQuery("select * from T_PRODUCT_SPECIFICATION")
         ) {
             List<ProductSpecificationDto> products = new ArrayList<>();
             while (resultSet.next()) {

@@ -25,11 +25,9 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public String saveNewPerson(Person person) {
-        Session session = null;
-        String savedId;
-        session = sessionFactory.getCurrentSession();
-        savedId = (String) session.save(person);//Some work
-        return savedId;
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(person);//Some work
+        return person.getId();
     }
 
     @Override
@@ -51,7 +49,7 @@ public class PersonDaoImpl implements PersonDao {
         if (person == null) {
             return false;
         }
-        session.delete(person);
+        session.remove(person);
         return true;
     }
 
