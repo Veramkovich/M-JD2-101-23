@@ -1,0 +1,45 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "eShop REST API",
+    "version": "v1",
+    "title": "eShop REST API"
+  },
+  "host": "localhost:8080",
+  "basePath": "/web",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/deliveries/types": {
+      "get": {
+        "operationId": "getAllDeliveryTypes",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeliveryType"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeliveryType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
